@@ -5,8 +5,8 @@
 # ....
 # e.g. 6th fibonacci number is 8
 
-# Time complexity: O(2^n)
-# Space complexity: O(n) stack space
+# Time complexity: O(n)
+# Space complexity: O(1)
 def fibonacci(n)
   if n.nil?
     raise ArgumentError.new("Input cannot be nil")
@@ -16,9 +16,17 @@ def fibonacci(n)
     raise ArgumentError.new("Input cannot be negative")
   end
 
-  if n <= 1
-    return n
+  return 0 if n == 0
+  return 1 if n == 1
+
+  first = 0
+  second = 1
+  result = 0
+  for i in 2..n
+    result = first + second
+    first = second
+    second = result
   end
 
-  return fibonacci(n - 1) + fibonacci(n - 2)
+  return result
 end
